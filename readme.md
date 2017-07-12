@@ -51,7 +51,7 @@ import emojione from 'u-wave-emojione'
 uw.emoji.useEmojiSet(emojione)
 ```
 
-### `uw.emoji.addCustomEmoji(user, shortcode, name)`
+### `uw.emoji.addCustomEmoji(user, shortcode, stream)`
 
 > In order to use custom emoji, a Blob Store must be configured.
 
@@ -64,7 +64,7 @@ Custom emoji persist across server restarts.
    This user must have the `emoji.add` role.
  - `shortcode` - String representing the emoji short code.
    May not contain whitespace.
- - `name` - The name of the custom emoji file.
+ - `stream` - A stream or Buffer containing the emoji image data.
 
 ### `uw.emoji.deleteCustomEmoji(user, shortcode)`
 
