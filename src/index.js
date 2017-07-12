@@ -149,7 +149,10 @@ class EmojiManager extends Router {
     const emoji = await this.Emoji.findOne({ shortcode });
     if (emoji) {
       await emoji.remove();
-      await this.uw.publish('emoji:remove', { shortcode });
+      await this.uw.publish('emoji:remove', {
+        shortcode,
+        user: user.id,
+      });
     }
   }
 

@@ -93,6 +93,25 @@ Returns an object `{set, shortcode, name, addedBy}`.
 Retrieve all emoji.
 Returns a Promise for an object of the shape `{shortcode: "name"}`.
 
+### Message: `emoji:add`
+
+Whenever a custom emoji is added, an `emoji:add` message is published to the `uwave` channel.
+
+**Data**
+
+ - `shortcode` - Shortcode of the new emoji.
+ - `name` - File name of the emoji.
+ - `addedBy` - User ID of the user who added the emoji.
+
+### Message: `emoji:remove`
+
+Whenever a custom emoji is removed, an `emoji:remove` message is published to the `uwave` channel.
+
+**Data**
+
+ - `shortcode` - Shortcode of the emoji that has been removed.
+ - `user` - User ID of the user who removed the emoji.
+
 ## License
 
 [MIT](./LICENSE)
