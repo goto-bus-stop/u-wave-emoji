@@ -126,7 +126,7 @@ class EmojiManager extends Router {
     await this.Emoji.create({
       shortcode,
       name,
-      addedBy: user._id,
+      addedBy: user._id, // eslint-disable-line no-underscore-dangle
     });
     await this.uw.publish('emoji:add', {
       shortcode,
@@ -134,6 +134,12 @@ class EmojiManager extends Router {
       addedBy: user ? user.id : null,
     });
 
+    return {
+      set: null,
+      shortcode,
+      name,
+      addedBy: user,
+    };
   }
 
   async deleteCustomEmoji(user, shortcode) {
