@@ -41,6 +41,12 @@ function onFinish(stream) {
   });
 }
 
+async function assertPermission(user, permission) {
+  const can = await user.can(permission);
+  if (!can) throw new Error(`User does not have the "${permission}" role.`);
+  return true;
+}
+
 class EmojiManager extends Router {
   constructor(uw, opts) {
     const router = super();
@@ -108,7 +114,7 @@ class EmojiManager extends Router {
       throw new Error('Custom emoji are not enabled.');
     }
     if (user) {
-      await user.can('emoji.add');
+      await assertPermission(user, 'emoji.add');
     }
     if (typeof shortcode !== 'string') {
       throw new TypeError('shortcode: Expected a string');
@@ -144,7 +150,7 @@ class EmojiManager extends Router {
 
   async deleteCustomEmoji(user, shortcode) {
     if (user) {
-      await user.can('emoji.remove');
+      await assertPermission(user, 'emoji.remove');
     }
     const emoji = await this.Emoji.findOne({ shortcode });
     if (emoji) {
