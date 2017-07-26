@@ -1,9 +1,10 @@
-import { Readable, PassThrough } from 'stream';
 import Router from 'router';
 import serveStatic from 'serve-static';
 import FSStore from 'fs-blob-store';
 import isStream from 'is-stream';
 import isBuffer from 'is-buffer';
+import through from 'through2';
+import fromBuffer from 'from2-buffer';
 import imageType from 'image-type';
 
 function toImageStream(input) {
@@ -11,13 +12,12 @@ function toImageStream(input) {
   if (isStream(input)) {
     stream = input;
   } else if (isBuffer(input)) {
-    stream = new Readable();
-    stream.push(input);
+    stream = fromBuffer(input);
   } else {
     throw new TypeError('toImageStream: Expected a stream or a Buffer.');
   }
 
-  const output = new PassThrough();
+  const output = through();
   stream.pipe(output);
 
   return new Promise((resolve, reject) => {
