@@ -4,7 +4,8 @@
   "description": "Emoji management plugin for üWave.",
   "license": "MIT",
   "author": "Renée Kooi <renee@kooi.me>",
-  "main": "index.js",
+  "main": "dist/u-wave-emoji.cjs.js",
+  "module": "dist/u-wave-emoji.es.js",
   "repository": "u-wave/u-wave-emoji",
   "keywords": [
     "u-wave"
@@ -13,26 +14,29 @@
   "homepage": "https://github.com/u-wave/u-wave-emoji#readme",
   "scripts": {
     "prepare": "npm run build",
-    "build": "babel --out-dir lib src",
+    "build": "rollup -c",
     "test:lint": "eslint .",
     "test": "npm run test:lint"
+  },
+  "engines": {
+    "node": ">= 8.9"
   },
   "dependencies": {
     "from2-buffer": "^1.0.0",
     "fs-blob-store": "^5.2.1",
     "image-type": "^3.0.0",
-    "is-buffer": "^1.1.5",
+    "is-buffer": "^2.0.0",
     "is-stream": "^1.1.0",
-    "router": "^1.3.1",
-    "serve-static": "^1.12.3",
+    "router": "^1.3.2",
+    "serve-static": "^1.13.1",
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.24.1",
-    "eslint": "^4.1.1",
-    "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.7.0"
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "is-builtin-module": "^2.0.0",
+    "rollup": "^0.55.1",
+    "rollup-plugin-node-resolve": "^3.0.2"
   }
 }
