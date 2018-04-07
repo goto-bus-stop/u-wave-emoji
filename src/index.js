@@ -181,10 +181,10 @@ class EmojiManager extends Router {
         map[shortcode] = set.emoji[shortcode];
       });
     });
-    await this.Emoji.find({}, { shortcode: 1, name: 1 }).lean().exec()
-      .each(({ shortcode, name }) => {
-        map[shortcode] = name;
-      });
+    const emoji = await this.Emoji.find({}, { shortcode: 1, name: 1 }).lean().exec();
+    emoji.forEach(({ shortcode, name }) => {
+      map[shortcode] = name;
+    });
     return map;
   }
 }
